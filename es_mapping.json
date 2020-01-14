@@ -1,0 +1,198 @@
+{
+  "settings" : {
+    "number_of_shards" : 4,
+    "analysis": {
+      "analyzer": {
+        "aff_analyzer": {
+          "tokenizer": "aff_tokenizer",
+          "filter": [
+            "lowercase",
+            "trim",
+            "unique"
+          ]
+        }
+      },
+      "tokenizer": {
+        "aff_tokenizer": {
+          "type": "pattern",
+          "pattern": "[\\,\\/\\;\\:\\.]"
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "PMID": {
+        "type": "integer"
+      },
+      "ArticleTitle": {
+        "type": "text"
+      },
+      "AbstractText": {
+        "type": "text"
+      },
+      "Language": {
+        "type": "text"
+      },
+      "PublicationTypeList": {
+        "type": "nested",
+        "properties": {
+          "PublicationType": {
+            "type": "text"
+          }
+        }
+      },
+      "PubDate": {
+        "type": "integer"
+      },
+      "ISSN": {
+        "type": "text"
+      },
+      "Title": {
+        "type": "text"
+      },
+      "Author": {
+        "type": "nested",
+        "properties": {
+          "LastName": {
+            "type": "text"
+          },
+          "ForeName": {
+            "type": "text"
+          },
+          "FullName": {
+            "type": "text"
+          },
+          "regexFullName": {
+            "type": "text"
+          },
+          "Affiliation": {
+            "type": "text",
+            "fields": {
+              "rawAffiliation": {
+                "type":     "text",
+                "analyzer": "aff_analyzer"
+              }
+            }
+          },
+          "CollectiveName": {
+            "type": "text"
+          }
+        }
+      },
+      "KeywordList": {
+        "type": "nested",
+        "properties": {
+          "Keyword": {
+            "type": "text",
+            "fields": {
+              "rawKeyword": {
+                "type": "keyword"
+              }
+            }
+          }
+        }
+      },
+      "MeshHeadingList": {
+        "type": "nested",
+        "properties": {
+          "MeshHeading": {
+            "type": "text",
+            "fields": {
+              "rawMeshHeading": {
+                "type": "keyword"
+              }
+            }
+          }
+        }
+      },
+      "Country": {
+        "type": "text"
+      },
+      "AffiliationSetList": {
+        "type": "nested",
+        "properties": {
+          "AffiliationSet": {
+            "type": "text",
+            "fields": {
+              "rawAffiliationSet": {
+                "type": "keyword"
+              }
+            }
+          }
+        }
+      },
+      "EmailAffiliationSetList": {
+        "type": "nested",
+        "properties": {
+          "EmailAffiliationSet": {
+            "type": "text",
+            "fields": {
+              "rawEmailAffiliationSet": {
+                "type": "keyword"
+              }
+            }
+          }
+        }
+      },
+      "JCRMetrics": {
+        "type": "nested",
+        "properties": {
+          "JCRYear": {
+            "type": "text",
+            "fields": {
+              "rawYear": {
+                "type": "keyword"
+              }
+            }
+          },
+          "JCRImpactFactor": {
+            "type": "text",
+            "fields": {
+              "rawImpactFactor": {
+                "type": "keyword"
+              }
+            }
+          },
+          "JCRPercentile": {
+            "type": "text",
+            "fields": {
+              "rawPercentile": {
+                "type": "keyword"
+              }
+            }
+          }
+        }
+      },
+      "JCRCategoryList": {
+        "type": "nested",
+        "properties": {
+          "JCRCategoryID": {
+            "type": "text",
+            "fields": {
+              "rawJCRCategoryID": {
+                "type": "keyword"
+              }
+            }
+          },
+          "JCRCategoryName": {
+            "type": "text",
+            "fields": {
+              "rawJCRCategoryName": {
+                "type": "keyword"
+              }
+            }
+          },
+          "JCRCategoryEdition": {
+            "type": "text",
+            "fields": {
+              "rawJCRCategoryEdition": {
+                "type": "keyword"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

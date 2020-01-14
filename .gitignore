@@ -1,0 +1,7 @@
+.idea/
+venv/
+__pycache__/
+downloads_pubmed/
+downloads_pubmed_unziped/
+downloads_jcr/
+combined_json/
